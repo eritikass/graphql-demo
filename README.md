@@ -11,18 +11,18 @@ npm i graphql express-graphql
 ## Define schema
 
 ```graphql
-  type Message {
-    ID: ID!
-    title: String!
-    body: String
-  }
+type Message {
+  ID: ID!
+  title: String!
+  body: String
+}
 
-  type Query {
-    messages: [Message]
-  }
-  type Mutation {
-    addMessage(title: String!, body: String): Message
-  }
+type Query {
+  messages: [Message]
+}
+type Mutation {
+  addMessage(title: String!, body: String): Message
+}
 ```
 
 ## Add GraphQL serve code
