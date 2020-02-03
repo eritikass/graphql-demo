@@ -16,9 +16,8 @@ const { ApolloServer, gql } = require("apollo-server-express");
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
   type Message {
-    ID: ID!
     title: String!
-    body: String
+    body: String!
   }
 
   type Query {
@@ -40,7 +39,6 @@ const resolvers = {
   },
   Mutation: {
     addMessage: (root, message) => {
-      message.ID = messages.length;
       messages.push(message);
       return message;
     }
@@ -73,16 +71,13 @@ type Query {
 type Message {
   ID: ID!
   title: String!
-  body(trim: Int): String
+  body(trim: Int = 10): String
 }
 ```
 
 ```js
 Message: {
   body: (root, params) => {
-    if (!root.body || !params.trim || root.body.length < params.trim) {
-      return root.body;
-    }
     return root.body.substr(0, params.trim) + "...";
   };
 }
