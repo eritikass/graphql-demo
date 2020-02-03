@@ -14,7 +14,7 @@ const typeDefs = gql`
     " message title"
     title: String!
     " message body"
-    body(" trim post after x characters" trim: Int): String
+    body(" trim post after x characters" trim: Int = 3): String
   }
 
   type Query {
@@ -54,9 +54,6 @@ const resolvers = {
   },
   Message: {
     body: (root, params) => {
-      if (!root.body || !params.trim || root.body.length < params.trim) {
-        return root.body;
-      }
       return root.body.substr(0, params.trim) + "...";
     }
   }
